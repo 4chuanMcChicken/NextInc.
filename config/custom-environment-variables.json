@@ -1,0 +1,6 @@
+{
+
+  "crypt": {
+    "secret": "WEBTOKEN_SECRET"
+  }
+}

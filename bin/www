@@ -1,0 +1,93 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const _ = require('lodash');
+var app = require('../src/app');
+var debug = require('debug')('demo:server');
+var http = require('http');
+const url = require('url');
+const config = require('config');
+const constants = require('../src/utils/constantUtil');
+const {authRawTokenWithFlag} = require("../src/middlewares/validateParams");
+const logger = require("../src/lib/log")("www");
+const {socketServer} = require("../src/webSocket/subscriber");
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = config.get("LISTENING_PORT") || '3000';
+// app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app.callback());
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port);
+server.on('error', onError);
+
+server.on('upgrade', async function upgrade(request, socket, head) {
+  const { pathname, query } = url.parse(request.url, true);
+
+  var queryObj = _.assign(queryObj, query);
+  socketServer.handleUpgrade(request, socket, head, function done(ws) {
+      socketServer.emit('connection', ws, request);
+      socketServer.emit('close', ws, request);
+  });
+});
+
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+module.exports = server.on('listening', onListening);

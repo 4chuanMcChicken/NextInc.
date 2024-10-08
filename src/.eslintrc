@@ -1,0 +1,24 @@
+{
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
+  "rules": {
+    "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']","try-catch"],
+    "no-return-assign": "warn",
+    "no-param-reassign": "warn",
+    "no-await-in-loop": "off",
+    "no-plusplus": "warn",
+    "indent": [2, 4],
+    "consistent-return": "off",
+    "no-continue": "off",
+    "class-methods-use-this": "warn",
+    "no-underscore-dangle": "off",
+    "no-template-curly-in-string": "off",
+    "camelcase": "warn",
+    "prefer-const": "warn",
+    "function-paren-newline": "warn",
+    "comma-dangle": "warn",
+    "max-len": "warn"
+  }
+}
