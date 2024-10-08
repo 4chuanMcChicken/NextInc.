@@ -11,7 +11,7 @@ establish a WS connect to the server:
 node webSocketClient/client.js 
 
 Do the message broadcase:
-send a POST http request: localhost:8082/boardcastWS
+send a POST http request: localhost:8082/broadcastWS
 
 
 =================================================================================
@@ -84,11 +84,11 @@ Body Parameters:
 5. Broadcast WebSocket Message
 Broadcast a message to all connected WebSocket clients.
 
-URL: /boardcastWS
+URL: /broadcastWS
 
 Method: POST
 
-example: localhost:8082/boardcastWS
+example: localhost:8082/broadcastWS
 
 =================================================================================
 

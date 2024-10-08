@@ -4,7 +4,7 @@ const addResource = require('../../controller/addResource');
 const getAllResources = require('../../controller/getAllResources');
 const getResourceById = require('../../controller/getResourceById');
 const deleteResourceById = require('../../controller/deleteResourceById');
-const boardcastWS = require('../../controller/boardcastWS');
+const broadcastWS = require('../../controller/broadcastWS');
 
 const {
     validateParams,
@@ -45,8 +45,8 @@ router.delete(
 );
 
 router.post(
-    '/boardcastWS',
-    boardcastWS,
+    '/broadcastWS',
+    broadcastWS,
 );
 
 module.exports = router;

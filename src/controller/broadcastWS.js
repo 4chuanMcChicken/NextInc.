@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 const response = require('../utils/responseUtil');
-const logger = require('../lib/log')('boardcastWS');
+const logger = require('../lib/log')('broadcastWS');
 const ResourceService = require('../service/resourceService');
 const { connSet } = require('../webSocket/subscriber');
 
